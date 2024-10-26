@@ -17,19 +17,19 @@ public class PlayerVoteEvent extends PlayerEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 
-	private VoteEntry vote;
+	private Vote vote;
 
-	public PlayerVoteEvent(Player who, VoteEntry vote) {
+	public PlayerVoteEvent(Player who, Vote vote) {
 		super(who);
 		this.vote = vote;
 	}
 
 	/**
-	 * Returns the {@link VoteEntry}
+	 * Returns the {@link Vote}
 	 *
-	 * @return the {@link VoteEntry}
+	 * @return the {@link Vote}
 	 */
-	public VoteEntry getVote() {
+	public Vote getVote() {
 		return vote;
 	}
 

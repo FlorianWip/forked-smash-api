@@ -15,6 +15,8 @@ public interface VoteService {
 
     CompletableFuture<List<Vote>> getVotes(UUID uuid);
 
+    CompletableFuture<List<Vote>> getUnclaimedVotes(UUID uuid);
+
     CompletableFuture<Vote> getLastVote(UUID uuid);
 
     CompletableFuture<Void> submitVoteAsClaimed(long voteId);

@@ -17,6 +17,11 @@ class VoteServiceFallback implements VoteService {
     }
 
     @Override
+    public CompletableFuture<List<Vote>> getUnclaimedVotes(UUID uuid) {
+        return CompletableFuture.completedFuture(List.of());
+    }
+
+    @Override
     public CompletableFuture<Vote> getLastVote(UUID uuid) {
         return CompletableFuture.completedFuture(getDummyVote());
     }

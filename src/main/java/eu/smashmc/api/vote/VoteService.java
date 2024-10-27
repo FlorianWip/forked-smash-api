@@ -1,9 +1,13 @@
 package eu.smashmc.api.vote;
 
+import eu.smashmc.api.Environment;
+import eu.smashmc.api.SmashComponent;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+@SmashComponent(value = {Environment.BUKKIT}, fallbackImpl = VoteServiceFallback.class)
 public interface VoteService {
 
 

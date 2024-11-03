@@ -2,6 +2,7 @@ package eu.smashmc.api.vote;
 
 import eu.smashmc.api.Environment;
 import eu.smashmc.api.SmashComponent;
+import eu.smashmc.api.vote.leaderBoard.VoteLeaderBoard;
 
 import java.util.List;
 import java.util.UUID;
@@ -49,4 +50,20 @@ public interface VoteService {
      * @return A {@link CompletableFuture} completing when the vote has been submitted as claimed
      */
     CompletableFuture<Void> submitVoteAsClaimed(long voteId);
+
+    /**
+     * Get the vote streak leaderboard.
+     *
+     * @param limit the maximum amount of entries to return
+     * @return A {@link CompletableFuture} completing the {@link VoteLeaderBoard} of the vote streak leaderboard
+     */
+    CompletableFuture<VoteLeaderBoard> getStreakLeaderBoard(int limit);
+
+    /**
+     * Get the vote count leaderboard.
+     *
+     * @param limit the maximum amount of entries to return
+     * @return A {@link CompletableFuture} completing the {@link VoteLeaderBoard} of the vote count leaderboard
+     */
+    CompletableFuture<VoteLeaderBoard> getVoteCountLeaderBoard(int limit);
 }

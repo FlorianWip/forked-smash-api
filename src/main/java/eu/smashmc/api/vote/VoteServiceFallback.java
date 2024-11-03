@@ -1,8 +1,10 @@
 package eu.smashmc.api.vote;
 
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import eu.smashmc.api.identity.minecraft.MinecraftIdentity;
+import eu.smashmc.api.vote.leaderBoard.VoteLeaderBoard;
+import eu.smashmc.api.vote.leaderBoard.VoteLeanderBoardEntry;
+
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 class VoteServiceFallback implements VoteService {
@@ -30,6 +32,63 @@ class VoteServiceFallback implements VoteService {
     public CompletableFuture<Void> submitVoteAsClaimed(long voteId) {
 
         return CompletableFuture.completedFuture(null);
+    }
+
+    @Override
+    public CompletableFuture<VoteLeaderBoard> getStreakLeaderBoard(int limit) {
+        return CompletableFuture.completedFuture(new VoteLeaderBoard() {
+
+            private final List<VoteLeanderBoardEntry> entries = new ArrayList<>();
+
+            @Override
+            public List<VoteLeanderBoardEntry> getEntries() {
+                init();
+                return entries;
+            }
+
+            @Override
+            public VoteLeanderBoardEntry getEntry(int index) {
+                init();
+                return entries.get(index);
+            }
+
+            private void init() {
+                if (entries.size() < limit) {
+                    for (int i = entries.size(); i < limit; i++) {
+                        entries.add(getDummyLeaderBoardEntry());
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public CompletableFuture<VoteLeaderBoard> getVoteCountLeaderBoard(int limit) {
+        return null;
+    }
+
+    private VoteLeanderBoardEntry getDummyLeaderBoardEntry() {
+        return new VoteLeanderBoardEntry() {
+            @Override
+            public UUID getUuid() {
+                return UUID.randomUUID();
+            }
+
+            @Override
+            public int getScore() {
+                return 0;
+            }
+
+            @Override
+            public MinecraftIdentity getIdentity() {
+                return null;
+            }
+
+            @Override
+            public String getName() {
+                return "dummyName";
+            }
+        };
     }
 
     private Vote getDummyVote() {
